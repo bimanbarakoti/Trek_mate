@@ -1,0 +1,19 @@
+.ai-chat-assistant{background:linear-gradient(180deg, var(--bg-primary), var(--bg-tertiary));border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;max-height:520px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.ai-chat-assistant__messages{overflow:auto;padding:8px;display:flex;flex-direction:column;gap:8px}
+.ai-chat-assistant__message{max-width:78%;padding:8px 12px;border-radius:12px}
+.ai-chat-assistant__message--user{align-self:flex-end;background:var(--primary-500);color:var(--text-inverse)}
+.ai-chat-assistant__message--assistant{align-self:flex-start;background:var(--bg-tertiary);color:var(--text-primary)}
+.ai-chat-assistant__quick-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ai-chat-assistant__form{display:flex;gap:8px;padding:8px;border-top:1px solid var(--border-light)}
+.ai-chat-assistant__input{flex:1;border:0;outline:none;resize:none;padding:8px;border-radius:8px}
+
+/* Responsive */
+@media (max-width: 540px) {
+  .ai-chat-assistant { max-width: 100%; padding: 8px }
+  .ai-chat-assistant__message{max-width:100%;}
+}
+
+/* Focus and reveal */
+.ai-chat-assistant.reveal { will-change: transform, opacity }
+.ai-chat-assistant :focus-visible { outline: 3px solid rgba(34,197,94,0.18); outline-offset: 3px }
+

@@ -1,16 +1,40 @@
-# React + Vite
+TrekMate
+========
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React + Vite application showcasing trekking routes and helpful tools, including an AI assistant.
 
-Currently, two official plugins are available:
+AI Integration
+--------------
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+TrekMate supports integration with two AI backends:
 
-## React Compiler
+- ChatGPT (server-side endpoint expected at `VITE_CHATGPT_API_URL`)
+- Gemini (server-side endpoint expected at `VITE_GEMINI_API_URL`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+If you want to enable the AI assistant, set the following environment variables in a `.env` file at the project root:
 
-## Expanding the ESLint configuration
+```
+VITE_CHATGPT_API_URL=https://your.api.server/ai/chatgpt
+VITE_GEMINI_API_URL=https://your.api.server/ai/gemini
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+During development, the assistant will use mock responses if the endpoints are not available.
+
+Usage
+-----
+
+- `npm install`
+- `npm run dev` to start the development server
+- `npm run build` to build the production bundle
+
+UI / UX
+-------
+
+- Responsive layout across desktop, tablet, and mobile
+- Search and filters for treks
+- AI assistant for recommendations, packing lists, and safety tips
+
+Contributing
+------------
+
+Contributions welcome. Ensure `npm run lint` passes before submitting a PR.

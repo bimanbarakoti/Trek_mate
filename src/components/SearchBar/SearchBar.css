@@ -1,0 +1,18 @@
+.search-bar{display:flex;align-items:center;background:#fff;border-radius:12px;padding:8px 10px;border:1px solid var(--border-base);box-shadow:0 6px 20px rgba(16,24,40,0.06);width:100%}
+.search-bar__icon{width:20px;height:20px;opacity:0.7;margin-right:8px}
+.search-bar__input{flex:1;border:0;outline:none;padding:8px 10px;font-size:14px;background:transparent}
+.search-bar__clear-btn{cursor:pointer;background:transparent;border:0;color:#666;padding:6px;border-radius:6px}
+.search-bar__input-wrapper{display:flex;align-items:center;width:100%}
+.search-bar:focus-within{box-shadow:0 12px 36px rgba(16,24,40,0.09)}
+
+/* Suggestions Dropdown */
+.search-bar__suggestions{position:absolute;left:0;right:0;top:100%;z-index:100;padding:8px 0;background:var(--bg-primary);border-radius:8px;box-shadow:var(--shadow-md);margin-top:8px}
+.search-bar__suggestions-list{list-style:none;margin:0;padding:6px 0}
+.search-bar__suggestion-item{padding:8px 12px;display:flex;align-items:center;gap:8px;cursor:pointer;border-radius:8px}
+.search-bar__suggestion-item:hover, .search-bar__suggestion-item--highlighted{background:var(--bg-secondary)}
+
+@media (max-width: 480px){
+  .search-bar{padding:10px 12px;border-radius:10px}
+  .search-bar__suggestions{left:8px;right:8px}
+}
+

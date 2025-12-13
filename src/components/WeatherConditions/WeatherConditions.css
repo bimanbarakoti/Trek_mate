@@ -1,0 +1,18 @@
+.weather-conditions{background:linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));border-radius:12px;padding:14px;box-shadow:var(--shadow-sm);color:var(--text-primary)}
+.weather-conditions .weather-conditions__header{display:flex;justify-content:space-between;align-items:center}
+.weather-conditions__current{display:flex;align-items:center;gap:12px}.weather-conditions__temperature-container{display:flex;align-items:center;gap:10px}
+.weather-conditions__temp-value{font-size:28px;font-weight:700}
+.weather-conditions__metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.weather-conditions__forecast-items{display:flex;gap:10px;overflow:auto;padding-top:10px}
+.weather-conditions__forecast-item{min-width:88px;background:linear-gradient(180deg,var(--bg-primary),var(--bg-tertiary));padding:8px;border-radius:8px;text-align:center}
+
+/* Make widget responsive */
+@media(max-width:880px){
+  .weather-conditions{padding:12px}
+  .weather-conditions__metrics{grid-template-columns:repeat(1,1fr)}
+}
+
+/* reveal & focus */
+.weather-conditions.reveal, .weather-conditions .weather-conditions__current[data-reveal] { will-change: transform, opacity }
+.weather-conditions :focus-visible { outline: 3px solid rgba(34,197,94,0.18); outline-offset: 3px }
+

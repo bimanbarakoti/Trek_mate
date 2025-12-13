@@ -1,0 +1,19 @@
+.scroll-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: var(--z-modal);
+  animation: fadeIn 250ms ease-in-out;
+}
+
+.scroll-to-top .ui-button {
+  border-radius: 9999px;
+  padding: 0.65rem 0.75rem;
+  min-width: 40px;
+  min-height: 40px;
+  display: inline-flex;
+}
+
+.scroll-to-top .ui-button:hover {
+  transform: translateY(-4px);
+}

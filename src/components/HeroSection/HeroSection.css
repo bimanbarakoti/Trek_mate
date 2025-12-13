@@ -1,0 +1,38 @@
+.hero-section{position:relative;height:520px;display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;border-radius:12px;overflow:hidden}
+.hero-section__overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(0,0,0,0.6));}
+.hero-section__content{position:relative;z-index:2;color:#fff;text-align:center;max-width:900px;padding:48px}
+.hero-section__title{font-size:clamp(28px,5vw,44px);line-height:1.02;margin:0 0 12px}
+.hero-section__subtitle{font-size:16px;opacity:0.95;margin-bottom:20px}
+.hero-section__buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-section__primary-btn{padding:12px 18px;border-radius:10px;background:var(--primary-500);color:#fff}
+.hero-section__secondary-btn{padding:10px 16px;border-radius:10px;background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.12)}
+.hero-section__search-container{margin-top:18px}
+.hero-section__scroll-indicator{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;width:36px;height:52px;border-radius:20px;border:2px solid rgba(255,255,255,0.8);display:flex;align-items:flex-start;justify-content:center;padding-top:6px}
+.hero-section__scroll-indicator .hero-section__dot{width:7px;height:7px;background:rgba(255,255,255,0.95);border-radius:999px;animation:scroll 1.4s infinite}
+@keyframes scroll{0%{transform:translateY(0)}50%{transform:translateY(12px)}100%{transform:translateY(0)}}
+
+/* Responsive */
+@media (max-width: 768px){
+  .hero-section{height:420px;padding:20px}
+  .hero-section__content{padding:28px}
+  .hero-section__title{font-size:clamp(22px,6vw,34px)}
+}
+
+@media (max-width: 480px){
+  .hero-section{height:auto;padding:28px 18px}
+  .hero-section__content{padding:18px}
+  .hero-section__subtitle{font-size:14px}
+  .hero-section__buttons{flex-direction:column;gap:10px}
+  .hero-section__primary-btn, .hero-section__secondary-btn{width:100%}
+  .hero-section__search-container{margin-top:12px}
+  .hero-section__scroll-indicator{display:none}
+}
+
+/* Reveal helper */
+.hero-section__content[data-reveal], .hero-section__title[data-reveal], .hero-section__buttons[data-reveal]{opacity:0;transform:translateY(12px);transition:opacity 420ms var(--ease-in-out), transform 420ms var(--ease-in-out)}
+.hero-section__content.is-visible, .hero-section__title.is-visible, .hero-section__buttons.is-visible{opacity:1;transform:none}
+
+/* Parallax fallback for mobile */
+@media (max-width: 480px){
+  .hero-section{background-attachment:scroll !important}
+}

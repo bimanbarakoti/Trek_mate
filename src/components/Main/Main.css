@@ -1,0 +1,1 @@
+.site-root{display:flex;flex-direction:column;min-height:100vh;background:var(--bg);color:var(--text)}.site-main{flex:1;max-width:1200px;margin:0 auto;padding:28px 18px;width:100%}
