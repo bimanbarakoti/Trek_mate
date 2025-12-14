@@ -143,9 +143,27 @@ const AIChatAssistant = ({
         setMessages(prev => [...prev, assistantMessage]);
 
       } else if (provider === 'gemini') {
-        // Fallback or Gemini integration -> use recommendations endpoint
-        const res = await GeminiService.getLocationBasedRecommendations({ name: 'User Area' }, 'all');
-        const content = res?.recommendations ? JSON.stringify(res.recommendations, null, 2) : 'No recommendations';
+        // Use Gemini for location-based recommendations and real-time data
+        let messageToSend = inputValue;
+        if (effectiveLocation) {
+          messageToSend += `\n\nUser Location: ${effectiveLocation.name || `${effectiveLocation.lat},${effectiveLocation.lng}`}`;
+        }
+        
+        // Determine the type of query and use appropriate Gemini service
+        const lowerMessage = inputValue.toLowerCase();
+        let res;
+        
+        if (lowerMessage.includes('weather') || lowerMessage.includes('forecast')) {
+          res = await GeminiService.getWeatherForecast(effectiveLocation || { name: 'Current Area' });
+        } else if (lowerMessage.includes('safety') || lowerMessage.includes('alert')) {
+          res = await GeminiService.getSafetyAlerts(effectiveLocation || { name: 'Current Area' });
+        } else if (lowerMessage.includes('near me') || lowerMessage.includes('nearby') || lowerMessage.includes('recommend')) {
+          res = await GeminiService.getLocationBasedRecommendations(effectiveLocation || { name: 'User Area' }, 'treks');
+        } else {
+          res = await GeminiService.getLocationBasedRecommendations(effectiveLocation || { name: 'User Area' }, 'all');
+        }
+        
+        const content = typeof res === 'string' ? res : JSON.stringify(res, null, 2);
         const assistantMessage = {
           id: messageIdRef.current++,
           role: 'assistant',
@@ -415,8 +433,7 @@ AIChatAssistant.propTypes = {
       value: PropTypes.string,
       icon: PropTypes.string
     })
-  )
-  ,
+  ),
   trek: PropTypes.object,
   location: PropTypes.object,
 };
@@ -429,9 +446,10 @@ AIChatAssistant.defaultProps = {
     { label: 'Popular treks', icon: '⛰️', value: 'Show me popular treks' },
     { label: 'Beginner friendly', icon: '👶', value: 'Show me beginner friendly treks' },
     { label: 'Hardest treks', icon: '💪', value: 'Show me the hardest treks' },
-    { label: 'Near me', icon: '📍', value: 'Find treks near me' }
-  ]
-  ,
+    { label: 'Near me', icon: '📍', value: 'Find treks near me' },
+    { label: 'Weather forecast', icon: '🌤️', value: 'Get weather forecast for my area' },
+    { label: 'Safety alerts', icon: '⚠️', value: 'Check safety alerts in my area' }
+  ],
   trek: null,
   location: null
 };

@@ -24,6 +24,7 @@ export const treks = [
     rating: 4.8,
     reviews: 342,
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400',
+    coordinates: { lat: 27.9881, lng: 86.9250 },
     gallery: [
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
       'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800',
@@ -154,6 +155,7 @@ export const treks = [
     rating: 4.7,
     reviews: 298,
     image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=500&h=400',
+    coordinates: { lat: -3.0674, lng: 37.3556 },
     gallery: [
       'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800',
       'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800',
@@ -198,6 +200,7 @@ export const treks = [
     rating: 4.9,
     reviews: 521,
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400',
+    coordinates: { lat: -13.1631, lng: -72.5450 },
     gallery: [
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
     ],
@@ -238,6 +241,7 @@ export const treks = [
     rating: 4.8,
     reviews: 187,
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400',
+    coordinates: { lat: -50.9423, lng: -73.4068 },
     gallery: [
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
     ],
@@ -287,6 +291,7 @@ export const treks = [
     rating: 4.6,
     reviews: 156,
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400',
+    coordinates: { lat: 42.1354, lng: 9.0183 },
     gallery: [
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
     ],
@@ -331,6 +336,7 @@ export const treks = [
     rating: 4.8,
     reviews: 412,
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400',
+    coordinates: { lat: 28.5967, lng: 83.9956 },
     gallery: [
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
     ],
@@ -388,6 +394,7 @@ export const treks = [
     rating: 4.7,
     reviews: 234,
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400',
+    coordinates: { lat: 45.8326, lng: 6.8652 },
     gallery: [
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
     ],
@@ -429,6 +436,7 @@ export const treks = [
     rating: 4.9,
     reviews: 389,
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400',
+    coordinates: { lat: -44.6459, lng: 167.9270 },
     gallery: [
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
     ],

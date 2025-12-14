@@ -2,12 +2,69 @@
 .hero-section__overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(0,0,0,0.6));}
 .hero-section__content{position:relative;z-index:2;color:#fff;text-align:center;max-width:900px;padding:48px}
 .hero-section__title{font-size:clamp(28px,5vw,44px);line-height:1.02;margin:0 0 12px}
-.hero-section__subtitle{font-size:16px;opacity:0.95;margin-bottom:20px}
-.hero-section__buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-section__subtitle {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+}
+.hero-section__buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
 .hero-section__primary-btn{padding:12px 18px;border-radius:10px;background:var(--primary-500);color:#fff}
 .hero-section__secondary-btn{padding:10px 16px;border-radius:10px;background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.12)}
-.hero-section__search-container{margin-top:18px}
-.hero-section__scroll-indicator{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;width:36px;height:52px;border-radius:20px;border:2px solid rgba(255,255,255,0.8);display:flex;align-items:flex-start;justify-content:center;padding-top:6px}
+.hero-section__search-container {
+  margin: 2rem 0;
+  max-width: 600px;
+  width: 100%;
+}
+
+.hero-section__search-container .search-bar {
+  width: 100%;
+}
+
+.hero-section__search-container .search-bar__input-wrapper {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.hero-section__search-container .search-bar__input-wrapper:focus-within {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+.hero-section__scroll-indicator {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18px;
+  width: 36px;
+  height: 52px;
+  border-radius: 20px;
+  border: 2px solid rgba(255,255,255,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 6px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-section__scroll-text {
+  font-size: 0.7rem;
+  margin-bottom: 0.25rem;
+}
+
+.hero-section__scroll-arrow {
+  width: 16px;
+  height: 16px;
+}
 .hero-section__scroll-indicator .hero-section__dot{width:7px;height:7px;background:rgba(255,255,255,0.95);border-radius:999px;animation:scroll 1.4s infinite}
 @keyframes scroll{0%{transform:translateY(0)}50%{transform:translateY(12px)}100%{transform:translateY(0)}}
 
@@ -24,7 +81,7 @@
   .hero-section__subtitle{font-size:14px}
   .hero-section__buttons{flex-direction:column;gap:10px}
   .hero-section__primary-btn, .hero-section__secondary-btn{width:100%}
-  .hero-section__search-container{margin-top:12px}
+  .hero-section__search-container{margin:1rem 0;max-width:100%}
   .hero-section__scroll-indicator{display:none}
 }
 

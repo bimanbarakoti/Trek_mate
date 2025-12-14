@@ -10,7 +10,9 @@
 
 import axiosInstance, { getCachedData, setCachedData } from './axiosInstance';
 
-const CHATGPT_API_URL = import.meta.env.VITE_CHATGPT_API_URL || '/api/ai/chatgpt';
+const CHATGPT_API_URL = import.meta.env.VITE_CHATGPT_API_URL;
+const CHATGPT_API_KEY = import.meta.env.VITE_CHATGPT_API_KEY;
+const USE_MOCK_DATA = !CHATGPT_API_URL && !CHATGPT_API_KEY;
 const CACHE_KEY_PREFIX = 'chatgpt_';
 
 /**
@@ -22,16 +24,24 @@ class ChatGPTService {
    * @returns {Promise} Session ID and initial response
    */
   static async initializeChat() {
+    if (USE_MOCK_DATA) {
+      return { sessionId: 'mock-session-' + Date.now() };
+    }
+    
     try {
+      if (CHATGPT_API_KEY) {
+        // Direct OpenAI API integration
+        return { sessionId: 'direct-api-' + Date.now() };
+      }
+      
       const response = await axiosInstance.post(`${CHATGPT_API_URL}/init`, {
         context: 'trek-guide',
-        systemPrompt:
-          'You are an expert travel guide specializing in trekking and adventure travel. Provide helpful, accurate, and safety-conscious advice.',
+        systemPrompt: 'You are an expert travel guide specializing in trekking and adventure travel. Provide helpful, accurate, and safety-conscious advice.',
       });
       return response.data;
     } catch (error) {
       console.error('[ChatGPT Service] Initialize chat error:', error);
-      throw error;
+      return { sessionId: 'fallback-session-' + Date.now() };
     }
   }
 
@@ -42,28 +52,60 @@ class ChatGPTService {
    * @returns {Promise} AI response
    */
   static async sendMessage(message, sessionId) {
+    if (USE_MOCK_DATA) {
+      // Return mock response
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      return {
+        text: `This is a mock response to: "${message}". To get real AI responses, configure VITE_CHATGPT_API_KEY or VITE_CHATGPT_API_URL in your .env file.`,
+        sessionId
+      };
+    }
+    
     try {
-      // Check cache first
-      const cacheKey = `${CACHE_KEY_PREFIX}message_${sessionId}`;
-      const cached = getCachedData(cacheKey);
-      if (cached) {
-        return cached;
+      if (CHATGPT_API_KEY) {
+        // Direct OpenAI API call
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${CHATGPT_API_KEY}`
+          },
+          body: JSON.stringify({
+            model: 'gpt-3.5-turbo',
+            messages: [
+              {
+                role: 'system',
+                content: 'You are an expert travel guide specializing in trekking and adventure travel. Provide helpful, accurate, and safety-conscious advice.'
+              },
+              {
+                role: 'user',
+                content: message
+              }
+            ],
+            max_tokens: 500,
+            temperature: 0.7
+          })
+        });
+        
+        const data = await response.json();
+        return {
+          text: data.choices?.[0]?.message?.content || 'Sorry, I could not process your request.',
+          sessionId
+        };
       }
-
+      
       const response = await axiosInstance.post(`${CHATGPT_API_URL}/chat`, {
         message,
         sessionId,
       });
-
-      // Cache the response
-      if (response.data) {
-        setCachedData(cacheKey, response.data);
-      }
-
+      
       return response.data;
     } catch (error) {
       console.error('[ChatGPT Service] Send message error:', error);
-      throw error;
+      return {
+        text: 'Sorry, I\'m having trouble connecting right now. Please try again later.',
+        sessionId
+      };
     }
   }
 

@@ -34,6 +34,8 @@ function TrekDetails() {
   const [guidanceLoading, setGuidanceLoading] = React.useState(false);
   const [guidanceError, setGuidanceError] = React.useState(null);
   const [assistantOpen, setAssistantOpen] = React.useState(false);
+  const [weatherData, setWeatherData] = React.useState(null);
+  const [routeConditions, setRouteConditions] = React.useState(null);
   const aiGuidanceRef = React.useRef(null);
 
   return (
@@ -90,22 +92,76 @@ function TrekDetails() {
                 setGuidanceError(null);
                 try {
                   // Ensure user location is set; if not, request permission
-                  if (!location) {
+                  let currentLocation = location;
+                  if (!currentLocation) {
                     try {
-                      await requestLocation();
+                      currentLocation = await requestLocation();
                     } catch (locErr) {
                       setGuidanceError('Please set your location to get tailored guidance.');
                       setGuidanceLoading(false);
                       return;
                     }
                   }
-                  // Fetch current route conditions and weather
-                  const [conditions, weather] = await Promise.all([
+
+                  // Fetch comprehensive data from both AI services
+                  const [conditions, weather, safetyAlerts, packingList, altitudeAdvice] = await Promise.all([
                     GeminiService.getRouteConditions(trek),
                     GeminiService.getWeatherForecast(trek),
+                    GeminiService.getSafetyAlerts(trek),
+                    ChatGPTService.generatePackingList({
+                      trekId: trek.id,
+                      name: trek.name,
+                      altitude: trek.altitude,
+                      difficulty: trek.difficulty,
+                      duration: trek.duration,
+                      region: trek.region,
+                      bestSeason: trek.bestSeason
+                    }),
+                    ChatGPTService.getAltitudeAdvice(trek.altitude, 'mountain')
                   ]);
 
-                  const prompt = `You are an expert trekking guide. The user wants guidance for the trek "${trek.name}" in region ${trek.region}.\n\nTrek summary: ${trek.description}\n\nConditions: ${JSON.stringify(conditions)}\n\nWeather: ${JSON.stringify(weather)}\n\nUser location: ${location ? (location.name || `${location.lat},${location.lng}`) : 'Not provided'}. Provide a concise guidance including safety tips, estimated best start time, acclimatization notes, and a concise packing checklist.`;
+                  // Store data for assistant use
+                  setWeatherData(weather);
+                  setRouteConditions(conditions);
+
+                  // Create comprehensive guidance prompt
+                  const prompt = `You are an expert trekking guide. Provide comprehensive guidance for the trek "${trek.name}" in ${trek.region}.
+
+TREK DETAILS:
+- Name: ${trek.name}
+- Region: ${trek.region}
+- Altitude: ${trek.altitude}m
+- Duration: ${trek.duration} days
+- Difficulty: ${trek.difficulty}
+- Best Season: ${trek.bestSeason}
+- Description: ${trek.description}
+
+CURRENT CONDITIONS (Gemini AI):
+${JSON.stringify(conditions, null, 2)}
+
+WEATHER FORECAST (Gemini AI):
+${JSON.stringify(weather, null, 2)}
+
+SAFETY ALERTS (Gemini AI):
+${JSON.stringify(safetyAlerts, null, 2)}
+
+PACKING RECOMMENDATIONS (ChatGPT):
+${JSON.stringify(packingList, null, 2)}
+
+ALTITUDE ADVICE (ChatGPT):
+${JSON.stringify(altitudeAdvice, null, 2)}
+
+USER LOCATION: ${currentLocation ? (currentLocation.name || `${currentLocation.lat},${currentLocation.lng}`) : 'Not provided'}
+
+Provide a comprehensive, well-structured guidance report covering:
+1. Current Conditions Summary
+2. Weather Outlook & Timing Recommendations
+3. Safety Considerations & Alerts
+4. Essential Packing List
+5. Altitude Acclimatization Plan
+6. Route-Specific Tips
+
+Keep it practical and actionable.`;
 
                   const init = await ChatGPTService.initializeChat();
                   const sessionId = init?.sessionId;
@@ -115,12 +171,12 @@ function TrekDetails() {
                   setTimeout(() => aiGuidanceRef.current?.focus(), 100);
                 } catch (err) {
                   console.error('Guidance error', err);
-                  setGuidanceError('Unable to fetch guidance. Please try again.');
+                  setGuidanceError('Unable to fetch comprehensive guidance. Please try again.');
                 } finally {
                   setGuidanceLoading(false);
                 }
               }} disabled={guidanceLoading}>
-                {guidanceLoading ? 'Fetching guidance…' : 'Get Guidance'}
+                {guidanceLoading ? 'Fetching AI Guidance…' : 'Get AI Guidance'}
               </button>
               {guidance && (
                 <>
@@ -131,7 +187,17 @@ function TrekDetails() {
             </div>
             {assistantOpen && (
               <div className="ai-guidance__assistant">
-                <AIChatAssistant initialMessage={guidance} trek={trek} location={location} />
+                <AIChatAssistant 
+                  initialMessage={guidance} 
+                  trek={trek} 
+                  location={location}
+                  quickActions={[
+                    { label: 'Weather Update', icon: '🌤️', value: 'Get current weather conditions' },
+                    { label: 'Safety Check', icon: '⚠️', value: 'Check current safety alerts' },
+                    { label: 'Packing List', icon: '🎒', value: 'Generate detailed packing list' },
+                    { label: 'Route Tips', icon: '🗺️', value: 'Get route-specific tips and advice' }
+                  ]}
+                />
               </div>
             )}
           </div>

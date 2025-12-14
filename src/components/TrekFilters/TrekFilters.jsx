@@ -12,6 +12,7 @@ import useScrollReveal from '../../hooks/useScrollReveal';
  * Features include range sliders, dropdowns, and reset functionality
  */
 const TrekFilters = ({
+  onChange,
   onFiltersChange,
   onApplyFilters,
   onResetFilters
@@ -21,10 +22,10 @@ const TrekFilters = ({
   const [filters, setFilters] = useState({
     region: '',
     difficulty: [],
-    durationMin: 0,
-    durationMax: 30,
-    costMin: 0,
-    costMax: 10000,
+    durationMin: 1,
+    durationMax: 20,
+    costMin: 100,
+    costMax: 2000,
     ratingMin: 0,
     searchQuery: ''
   });
@@ -40,8 +41,8 @@ const TrekFilters = ({
       region: e.target.value
     };
     setFilters(newFilters);
-    onFiltersChange?.(newFilters);
-  }, [filters, onFiltersChange]);
+    onChange?.(newFilters);
+  }, [filters, onChange]);
 
   /**
    * Handle difficulty checkbox change
@@ -56,8 +57,8 @@ const TrekFilters = ({
       difficulty: newDifficulties
     };
     setFilters(newFilters);
-    onFiltersChange?.(newFilters);
-  }, [filters, onFiltersChange]);
+    onChange?.(newFilters);
+  }, [filters, onChange]);
 
   /**
    * Handle duration range change
@@ -68,8 +69,8 @@ const TrekFilters = ({
       [type]: parseInt(value)
     };
     setFilters(newFilters);
-    onFiltersChange?.(newFilters);
-  }, [filters, onFiltersChange]);
+    onChange?.(newFilters);
+  }, [filters, onChange]);
 
   /**
    * Handle cost range change
@@ -80,8 +81,8 @@ const TrekFilters = ({
       [type]: parseInt(value)
     };
     setFilters(newFilters);
-    onFiltersChange?.(newFilters);
-  }, [filters, onFiltersChange]);
+    onChange?.(newFilters);
+  }, [filters, onChange]);
 
   /**
    * Handle rating filter change
@@ -92,8 +93,8 @@ const TrekFilters = ({
       ratingMin: parseInt(e.target.value)
     };
     setFilters(newFilters);
-    onFiltersChange?.(newFilters);
-  }, [filters, onFiltersChange]);
+    onChange?.(newFilters);
+  }, [filters, onChange]);
 
   /**
    * Handle search query change
@@ -104,8 +105,8 @@ const TrekFilters = ({
       searchQuery: e.target.value
     };
     setFilters(newFilters);
-    onFiltersChange?.(newFilters);
-  }, [filters, onFiltersChange]);
+    onChange?.(newFilters);
+  }, [filters, onChange]);
 
   /**
    * Reset all filters to defaults
@@ -114,15 +115,15 @@ const TrekFilters = ({
     const defaultFilters = {
       region: '',
       difficulty: [],
-      durationMin: 0,
-      durationMax: 30,
-      costMin: 0,
-      costMax: 10000,
+      durationMin: 1,
+      durationMax: 20,
+      costMin: 100,
+      costMax: 2000,
       ratingMin: 0,
       searchQuery: ''
     };
     setFilters(defaultFilters);
-    onResetFilters?.(defaultFilters);
+    onChange?.(defaultFilters);
   }, [onResetFilters]);
 
   /**
@@ -203,49 +204,61 @@ const TrekFilters = ({
               Duration: {filters.durationMin} - {filters.durationMax} days
             </label>
             <div className="trek-filters__range-inputs">
-              <input
-                type="range"
-                min="0"
-                max="30"
-                value={filters.durationMin}
-                onChange={(e) => handleDurationChange('durationMin', e.target.value)}
-                className="trek-filters__range-slider"
-              />
-              <input
-                type="range"
-                min="0"
-                max="30"
-                value={filters.durationMax}
-                onChange={(e) => handleDurationChange('durationMax', e.target.value)}
-                className="trek-filters__range-slider"
-              />
+              <div className="range-input-group">
+                <label>Min: {filters.durationMin} days</label>
+                <input
+                  type="range"
+                  min="1"
+                  max="30"
+                  value={filters.durationMin}
+                  onChange={(e) => handleDurationChange('durationMin', e.target.value)}
+                  className="trek-filters__range-slider"
+                />
+              </div>
+              <div className="range-input-group">
+                <label>Max: {filters.durationMax} days</label>
+                <input
+                  type="range"
+                  min="1"
+                  max="30"
+                  value={filters.durationMax}
+                  onChange={(e) => handleDurationChange('durationMax', e.target.value)}
+                  className="trek-filters__range-slider"
+                />
+              </div>
             </div>
           </div>
 
           {/* Cost Range Slider */}
           <div className="trek-filters__group">
             <label className="trek-filters__label">
-              Cost: ${filters.costMin} - ${filters.costMax}
+              Budget: ${filters.costMin} - ${filters.costMax}
             </label>
             <div className="trek-filters__range-inputs">
-              <input
-                type="range"
-                min="0"
-                max="10000"
-                step="100"
-                value={filters.costMin}
-                onChange={(e) => handleCostChange('costMin', e.target.value)}
-                className="trek-filters__range-slider"
-              />
-              <input
-                type="range"
-                min="0"
-                max="10000"
-                step="100"
-                value={filters.costMax}
-                onChange={(e) => handleCostChange('costMax', e.target.value)}
-                className="trek-filters__range-slider"
-              />
+              <div className="range-input-group">
+                <label>Min: ${filters.costMin}</label>
+                <input
+                  type="range"
+                  min="100"
+                  max="5000"
+                  step="100"
+                  value={filters.costMin}
+                  onChange={(e) => handleCostChange('costMin', e.target.value)}
+                  className="trek-filters__range-slider"
+                />
+              </div>
+              <div className="range-input-group">
+                <label>Max: ${filters.costMax}</label>
+                <input
+                  type="range"
+                  min="100"
+                  max="5000"
+                  step="100"
+                  value={filters.costMax}
+                  onChange={(e) => handleCostChange('costMax', e.target.value)}
+                  className="trek-filters__range-slider"
+                />
+              </div>
             </div>
           </div>
 

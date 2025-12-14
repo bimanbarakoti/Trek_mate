@@ -6,10 +6,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
 
 :root {
-  /* Colors */
-  --color-primary: #22c55e;
-  --color-primary-dark: #16a34a;
-  --color-primary-light: #86efac;
+  /* Colors - Updated to Blue Theme */
+  --color-primary: #3b82f6;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-light: #93c5fd;
 
   --color-secondary: #a855f7;
   --color-secondary-dark: #7e22ce;
@@ -100,20 +100,39 @@
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-primary: var(--color-dark-50);
-    --text-secondary: var(--color-dark-300);
+    --text-primary: #f9fafb;
+    --text-secondary: #e5e7eb;
     --bg-primary: var(--color-dark-900);
     --bg-secondary: var(--color-dark-800);
   }
 }
 
-/* Light Mode */
-@media (prefers-color-scheme: light) {
-  :root {
-    --text-primary: var(--color-dark-900);
-    --text-secondary: var(--color-dark-600);
-    --bg-primary: var(--color-white);
-    --bg-secondary: var(--color-dark-50);
+/* Light Mode - Default */
+:root {
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --color-white: #ffffff;
+}
+
+/* Container utility */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
   }
 }
 
@@ -131,13 +150,12 @@ html {
 }
 
 body {
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-normal);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
   line-height: 1.6;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
-  transition: background-color var(--transition-base), color var(--transition-base);
+  color: #111827;
+  background-color: #ffffff;
   overflow-x: hidden;
 }
 
@@ -146,6 +164,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
   margin-bottom: var(--space-md);
+  color: #111827;
 }
 
 h1 {
@@ -175,6 +194,7 @@ h6 {
 p {
   margin-bottom: var(--space-md);
   line-height: 1.8;
+  color: #374151;
 }
 
 a {

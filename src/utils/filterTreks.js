@@ -12,48 +12,50 @@
 export const filterTreks = (treks, filters = {}) => {
   const {
     searchQuery = '',
-    region = null,
-    difficulty = null,
-    maxDuration = null,
-    minDuration = null,
-    maxAltitude = null,
-    minAltitude = null,
-    maxCost = null,
-    minCost = null,
-    minRating = null,
-    season = null,
+    search = '',
+    region = '',
+    difficulty = [],
+    durationMin = 0,
+    durationMax = 30,
+    costMin = 0,
+    costMax = 10000,
+    ratingMin = 0,
     sortBy = 'rating',
   } = filters;
+  
+  const query = searchQuery || search;
 
   // Apply filters
   let filtered = treks.filter((trek) => {
     // Search query filter
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
+    if (query) {
+      const searchTerm = query.toLowerCase();
       if (
-        !trek.name.toLowerCase().includes(query) &&
-        !trek.description.toLowerCase().includes(query) &&
-        !trek.region.toLowerCase().includes(query)
+        !trek.name.toLowerCase().includes(searchTerm) &&
+        !trek.description.toLowerCase().includes(searchTerm) &&
+        !trek.region.toLowerCase().includes(searchTerm) &&
+        !trek.difficulty.toLowerCase().includes(searchTerm)
       ) {
         return false;
       }
     }
 
     // Region filter
-    if (region && trek.region !== region) {
+    if (region && region !== '' && trek.region !== region) {
       return false;
     }
 
-    // Difficulty filter
-    if (difficulty && trek.difficulty !== difficulty) {
+    // Difficulty filter (array)
+    if (difficulty && difficulty.length > 0 && !difficulty.includes(trek.difficulty)) {
       return false;
     }
 
     // Duration filters
-    if (maxDuration && trek.durationInDays > maxDuration) {
+    const trekDuration = parseInt(trek.duration) || trek.durationInDays || 0;
+    if (durationMax && trekDuration > durationMax) {
       return false;
     }
-    if (minDuration && trek.durationInDays < minDuration) {
+    if (durationMin && trekDuration < durationMin) {
       return false;
     }
 
@@ -66,15 +68,16 @@ export const filterTreks = (treks, filters = {}) => {
     }
 
     // Cost filters
-    if (maxCost && trek.costInUSD > maxCost) {
+    const trekCost = trek.costInUSD || parseInt(trek.cost?.replace(/[^0-9]/g, '')) || 0;
+    if (costMax && trekCost > costMax) {
       return false;
     }
-    if (minCost && trek.costInUSD < minCost) {
+    if (costMin && trekCost < costMin) {
       return false;
     }
 
     // Rating filter
-    if (minRating && trek.rating < minRating) {
+    if (ratingMin && ratingMin > 0 && trek.rating < ratingMin) {
       return false;
     }
 

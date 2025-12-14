@@ -9,6 +9,31 @@
   .home-page .layout-grid{grid-template-columns:240px 1fr 280px;padding:24px}
 }
 
+/* All treks section */
+.all-treks-section {
+  margin-top: 3rem;
+}
+
+.all-treks-section h3 {
+  margin: 0 0 1.5rem 0;
+  color: #111827;
+  font-size: 1.5rem;
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #f9fafb;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.no-results p {
+  color: #6b7280;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
 /* Responsive: mobile */
 @media (max-width: 768px){
   .home-page .layout-grid{grid-template-columns:1fr;padding:16px;gap:18px}
@@ -17,5 +42,13 @@
   .sidebar-col{display:none}
   .layout-controls{display:flex}
   .filters-toggle{display:inline-block}
+  
+  .all-treks-section {
+    margin-top: 2rem;
+  }
+  
+  .no-results {
+    padding: 2rem 1rem;
+  }
 }
 

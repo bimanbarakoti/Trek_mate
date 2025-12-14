@@ -3,21 +3,22 @@
  */
 
 .navbar {
-  background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   box-shadow: none;
   position: sticky;
   top: 0;
   z-index: 1000;
-  transition: box-shadow 240ms var(--ease-in-out), backdrop-filter 240ms var(--ease-in-out), transform 240ms var(--ease-in-out);
+  transition: box-shadow 240ms ease-in-out, backdrop-filter 240ms ease-in-out;
 }
 
 .navbar--scrolled {
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(6px) saturate(120%);
-  transform: translateY(0);
 }
 
-.navbar--scrolled .navbar-logo { transform: scale(0.98); }
+.navbar--scrolled .navbar-logo { 
+  transform: scale(0.98); 
+}
 
 
 .navbar-container {
@@ -77,16 +78,18 @@
 }
 
 .navbar-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .navbar-link.active {
   background-color: rgba(255, 255, 255, 0.2);
-  border-bottom: 2px solid white;
 }
 
 /* Focus visible for keyboard users */
-.navbar-link:focus-visible { outline: 2px solid rgba(255,255,255,0.18); outline-offset: 3px }
+.navbar-link:focus-visible { 
+  outline: 2px solid rgba(255,255,255,0.5); 
+  outline-offset: 2px;
+}
 
 /* Reveal helper */
 .navbar-links.reveal { display: flex; gap: 1rem }
@@ -154,11 +157,12 @@
     right: 0;
     flex-direction: column;
     gap: 0;
-    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     padding: 2rem;
     max-height: 0;
     overflow: hidden;
-    transition: max-height var(--transition-base);
+    transition: max-height 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   .navbar-menu.active {

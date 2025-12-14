@@ -1,18 +1,152 @@
-.weather-conditions{background:linear-gradient(180deg, var(--bg-primary), var(--bg-secondary));border-radius:12px;padding:14px;box-shadow:var(--shadow-sm);color:var(--text-primary)}
-.weather-conditions .weather-conditions__header{display:flex;justify-content:space-between;align-items:center}
-.weather-conditions__current{display:flex;align-items:center;gap:12px}.weather-conditions__temperature-container{display:flex;align-items:center;gap:10px}
-.weather-conditions__temp-value{font-size:28px;font-weight:700}
-.weather-conditions__metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
-.weather-conditions__forecast-items{display:flex;gap:10px;overflow:auto;padding-top:10px}
-.weather-conditions__forecast-item{min-width:88px;background:linear-gradient(180deg,var(--bg-primary),var(--bg-tertiary));padding:8px;border-radius:8px;text-align:center}
-
-/* Make widget responsive */
-@media(max-width:880px){
-  .weather-conditions{padding:12px}
-  .weather-conditions__metrics{grid-template-columns:repeat(1,1fr)}
+.weather-conditions {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* reveal & focus */
-.weather-conditions.reveal, .weather-conditions .weather-conditions__current[data-reveal] { will-change: transform, opacity }
-.weather-conditions :focus-visible { outline: 3px solid rgba(34,197,94,0.18); outline-offset: 3px }
+.weather-conditions__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
 
+.weather-conditions__header h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.weather-conditions__current {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.weather-conditions__temperature-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.weather-conditions__temp-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.weather-conditions__temp-unit {
+  font-size: 1.2rem;
+  color: #6b7280;
+}
+
+.weather-conditions__condition {
+  color: #374151;
+  font-weight: 500;
+}
+
+.weather-conditions__metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.weather-conditions__metric {
+  text-align: center;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.weather-conditions__metric-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.weather-conditions__metric-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.weather-conditions__forecast {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+}
+
+.weather-conditions__forecast h4 {
+  margin: 0 0 0.75rem 0;
+  color: #111827;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.weather-conditions__forecast-items {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.weather-conditions__forecast-item {
+  min-width: 80px;
+  background: #f8fafc;
+  padding: 0.75rem 0.5rem;
+  border-radius: 8px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.weather-conditions__forecast-day {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.weather-conditions__forecast-temp {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.weather-conditions__forecast-condition {
+  font-size: 0.7rem;
+  color: #374151;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .weather-conditions {
+    padding: 1rem;
+  }
+  
+  .weather-conditions__metrics {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .weather-conditions__forecast-items {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-conditions__temp-value {
+    font-size: 1.75rem;
+  }
+  
+  .weather-conditions__forecast-item {
+    min-width: 70px;
+    padding: 0.5rem 0.25rem;
+  }
+}

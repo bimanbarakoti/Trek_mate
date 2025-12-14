@@ -1,0 +1,150 @@
+.ai-assistant-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.ai-header {
+  background: linear-gradient(135deg, var(--color-primary, #3b82f6) 0%, var(--color-primary-dark, #1e40af) 100%);
+  color: white;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.ai-header h1 {
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.ai-header p {
+  font-size: 1.1rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.ai-content {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+  align-items: start;
+}
+
+.ai-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ai-features {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ai-features h3 {
+  margin: 0 0 1rem 0;
+  color: var(--color-text-primary, #1f2937);
+  font-size: 1.1rem;
+}
+
+.ai-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ai-features li {
+  padding: 0.5rem 0;
+  color: var(--color-text-secondary, #6b7280);
+  font-size: 0.9rem;
+}
+
+.ai-providers {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ai-providers h4 {
+  margin: 0 0 1rem 0;
+  color: var(--color-text-primary, #1f2937);
+  font-size: 1rem;
+}
+
+.provider-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: var(--color-primary, #3b82f6);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.ai-chat-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: fit-content;
+  min-height: 600px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .ai-content {
+    grid-template-columns: 280px 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ai-header {
+    padding: 2rem 0;
+  }
+  
+  .ai-header h1 {
+    font-size: 2rem;
+  }
+  
+  .ai-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .ai-sidebar {
+    order: 2;
+  }
+  
+  .ai-chat-container {
+    order: 1;
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-header {
+    padding: 1.5rem 0;
+  }
+  
+  .ai-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .ai-features,
+  .ai-providers {
+    padding: 1rem;
+  }
+  
+  .ai-chat-container {
+    min-height: 400px;
+  }
+}

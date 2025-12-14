@@ -11,7 +11,9 @@
 
 import axiosInstance, { getCachedData, setCachedData } from './axiosInstance';
 
-const GEMINI_API_URL = import.meta.env.VITE_GEMINI_API_URL || '/api/ai/gemini';
+const GEMINI_API_URL = import.meta.env.VITE_GEMINI_API_URL;
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+const USE_MOCK_DATA = !GEMINI_API_URL && !GEMINI_API_KEY;
 const CACHE_KEY_PREFIX = 'gemini_';
 const WEATHER_CACHE_DURATION = 30 * 60 * 1000; // 30 minutes for weather data
 
@@ -25,30 +27,64 @@ class GeminiService {
    * @returns {Promise} Weather forecast data
    */
   static async getWeatherForecast(trekLocation) {
+    if (USE_MOCK_DATA) {
+      await new Promise(resolve => setTimeout(resolve, 800));
+      return {
+        forecast: [
+          { day: 'Today', condition: 'Sunny', temp: 22, humidity: 45 },
+          { day: 'Tomorrow', condition: 'Partly Cloudy', temp: 19, humidity: 55 },
+          { day: 'Day 3', condition: 'Light Rain', temp: 16, humidity: 75 },
+        ],
+        isMockData: true,
+      };
+    }
+    
     try {
-      const cacheKey = `${CACHE_KEY_PREFIX}weather_${trekLocation.id || trekLocation.name}`;
-      const cached = getCachedData(cacheKey);
-      if (cached) {
-        return cached;
+      if (GEMINI_API_KEY) {
+        // Direct Gemini API call
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: `Provide a 3-day weather forecast for ${trekLocation.name || 'the trekking area'}. Format as JSON with day, condition, temp (celsius), and humidity.`
+              }]
+            }]
+          })
+        });
+        
+        const data = await response.json();
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        
+        try {
+          const forecast = JSON.parse(text);
+          return { forecast, isMockData: false };
+        } catch {
+          return {
+            forecast: [
+              { day: 'Today', condition: 'Variable', temp: 18, humidity: 60 },
+              { day: 'Tomorrow', condition: 'Check locally', temp: 20, humidity: 50 },
+            ],
+            isMockData: true,
+          };
+        }
       }
-
+      
       const response = await axiosInstance.post(`${GEMINI_API_URL}/weather`, {
         location: trekLocation,
         timeframe: 'next_14_days',
       });
-
-      if (response.data) {
-        setCachedData(cacheKey, response.data, WEATHER_CACHE_DURATION);
-      }
-
+      
       return response.data;
     } catch (error) {
       console.error('[Gemini Service] Get weather forecast error:', error);
-      // Return mock data as fallback
       return {
         forecast: [
-          { day: 'Today', condition: 'Sunny', temp: 20, humidity: 50 },
-          { day: 'Tomorrow', condition: 'Cloudy', temp: 18, humidity: 60 },
+          { day: 'Today', condition: 'Check locally', temp: 20, humidity: 50 },
+          { day: 'Tomorrow', condition: 'Variable', temp: 18, humidity: 60 },
         ],
         isMockData: true,
       };

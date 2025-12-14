@@ -101,7 +101,12 @@ const HeroSection = ({
           <SearchBar 
             onSearch={handleSearchSubmit}
             placeholder="Search treks by name, region, or difficulty..."
-            isFocused={true}
+            suggestions={[
+              'Everest Base Camp', 'Kilimanjaro', 'Inca Trail', 'Annapurna Circuit',
+              'Mont Blanc', 'Torres del Paine', 'GR20 Corsica', 'Milford Track',
+              'Himalayas', 'Africa', 'South America', 'Europe', 'Oceania',
+              'Easy', 'Medium', 'Hard'
+            ]}
           />
         </div>
 

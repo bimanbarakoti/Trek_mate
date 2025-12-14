@@ -1,0 +1,73 @@
+.location-based-treks {
+  margin: 2rem 0;
+}
+
+.location-based-treks__header {
+  margin-bottom: 1.5rem;
+}
+
+.location-based-treks__header h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--color-primary);
+}
+
+.location-based-treks__location {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.location-based-treks__loading,
+.location-based-treks__error,
+.location-based-treks__prompt,
+.location-based-treks__empty {
+  text-align: center;
+  padding: 2rem;
+  background: var(--color-background-secondary);
+  border-radius: 8px;
+}
+
+.location-based-treks__loading p,
+.location-based-treks__prompt p,
+.location-based-treks__empty p {
+  margin: 1rem 0 0 0;
+  color: var(--color-text-secondary);
+}
+
+.location-based-treks__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.location-based-trek-item {
+  position: relative;
+}
+
+.trek-distance {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  z-index: 1;
+}
+
+.location-based-treks__mock-notice {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.location-based-treks__mock-notice small {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .location-based-treks__grid {
+    grid-template-columns: 1fr;
+  }
+}

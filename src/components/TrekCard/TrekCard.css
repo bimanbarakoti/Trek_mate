@@ -70,15 +70,16 @@
 .trek-card__title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #111827;
   margin: 0 0 0.5rem 0;
   line-height: 1.4;
 }
 
 .trek-card__region {
-  color: #6b7280;
+  color: #4b5563;
   font-size: 0.875rem;
   margin: 0;
+  font-weight: 500;
 }
 
 .trek-card__rating {
@@ -99,7 +100,7 @@
 }
 
 .trek-card__description {
-  color: #4b5563;
+  color: #374151;
   font-size: 0.875rem;
   line-height: 1.6;
   margin-bottom: 1rem;
@@ -132,7 +133,7 @@
 .trek-card__detail-value {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #1f2937;
+  color: #111827;
 }
 
 .trek-card__cta-button {

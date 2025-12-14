@@ -1,0 +1,128 @@
+.treks-page {
+  min-height: 100vh;
+}
+
+.treks-header {
+  background: linear-gradient(135deg, var(--color-primary, #3b82f6) 0%, var(--color-primary-dark, #1e40af) 100%);
+  color: white;
+  padding: 4rem 0 3rem;
+  text-align: center;
+}
+
+.treks-header h1 {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.treks-header p {
+  font-size: 1.2rem;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+}
+
+.treks-search {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.treks-content {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+  align-items: start;
+}
+
+.treks-filters {
+  position: sticky;
+  top: 120px;
+}
+
+.treks-results {
+  min-height: 400px;
+}
+
+.results-header {
+  margin-bottom: 2rem;
+}
+
+.results-header h2 {
+  color: var(--color-text-primary, #1f2937);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.trek-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--color-text-secondary, #6b7280);
+}
+
+.no-results h3 {
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+  color: var(--color-text-primary, #1f2937);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .treks-content {
+    grid-template-columns: 240px 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .treks-header {
+    padding: 3rem 0 2rem;
+  }
+  
+  .treks-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .treks-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .treks-filters {
+    position: relative;
+    top: auto;
+  }
+  
+  .trek-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .treks-header {
+    padding: 2rem 0 1.5rem;
+  }
+  
+  .treks-header h1 {
+    font-size: 2rem;
+  }
+  
+  .treks-header p {
+    font-size: 1rem;
+  }
+  
+  .trek-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .no-results {
+    padding: 3rem 1rem;
+  }
+}
