@@ -1,40 +1,69 @@
-TrekMate
-========
+<div align="center">
 
-A small React + Vite application showcasing trekking routes and helpful tools, including an AI assistant.
+# 🏔️ TrekMate  
+### *Your Smart Trek & Trip Guide*
 
-AI Integration
---------------
+🚀 **AI-Powered • Weather-Aware • Adventure-Ready**
 
-TrekMate supports integration with two AI backends:
+[![React](https://img.shields.io/badge/React-18-blue?logo=react)](#)
+[![Vite](https://img.shields.io/badge/Vite-fast-purple?logo=vite)](#)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-modern-38B2AC?logo=tailwindcss)](#)
+[![License](https://img.shields.io/badge/License-MIT-green)](#)
 
-- ChatGPT (server-side endpoint expected at `VITE_CHATGPT_API_URL`)
-- Gemini (server-side endpoint expected at `VITE_GEMINI_API_URL`)
+</div>
 
-If you want to enable the AI assistant, set the following environment variables in a `.env` file at the project root:
+---
 
-```
-VITE_CHATGPT_API_URL=https://your.api.server/ai/chatgpt
-VITE_GEMINI_API_URL=https://your.api.server/ai/gemini
-```
+## 🌍 About TrekMate
+**TrekMate** is a modern, frontend-only trekking and travel guide built with **React + Vite**.  
+It helps trekkers explore routes, understand weather conditions, plan itineraries, and receive **AI-powered suggestions** for a safer and smarter adventure.
 
-During development, the assistant will use mock responses if the endpoints are not available.
+Powered by **ChatGPT** for intelligent guidance and **Gemini AI** for real-time trek and weather accuracy.
 
-Usage
------
+---
 
-- `npm install`
-- `npm run dev` to start the development server
-- `npm run build` to build the production bundle
+## ✨ Key Features
+🏔️ **Explore Treks**  
+Browse curated trekking routes with difficulty, altitude, and region info.
 
-UI / UX
--------
+🌦️ **Live Weather Conditions**  
+Accurate, real-time weather and route conditions via Gemini AI.
 
-- Responsive layout across desktop, tablet, and mobile
-- Search and filters for treks
-- AI assistant for recommendations, packing lists, and safety tips
+🤖 **AI Trek Assistant**  
+Smart trip planning, packing lists, and safety tips using ChatGPT.
 
-Contributing
-------------
+📍 **Smart Itinerary Generator**  
+AI-assisted travel schedules based on trek difficulty and duration.
 
-Contributions welcome. Ensure `npm run lint` passes before submitting a PR.
+💾 **Offline Friendly**  
+Recent treks and preferences stored using localStorage.
+
+📱 **Responsive UI**  
+Optimized for mobile, tablet, and desktop screens.
+
+---
+
+## 🛠️ Tech Stack
+| Category | Technology |
+|--------|------------|
+| Frontend | React + Vite |
+| Styling | CSS / TailwindCSS |
+| Routing | React Router |
+| AI | OpenAI ChatGPT, Google Gemini |
+| API Client | Axios |
+| State | React Hooks & Context |
+
+---
+
+🚀 Future Enhancements
+
+🌐 PWA support
+
+🗺️ Trek route maps (GPX)
+
+⭐ User reviews & ratings
+
+🌏 Multi-language support
+
+🔔 Weather alerts & notifications
+
